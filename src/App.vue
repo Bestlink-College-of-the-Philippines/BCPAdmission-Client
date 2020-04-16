@@ -26,8 +26,16 @@
 
 <script>
   export default {
-    data () => ({
-
-    });
+    
+    data: () => ({
+       shs: {
+         src : require("./assets/shs.svg"),
+         link : ""
+       },
+       college: {
+         src : require("./assets/college.svg"),
+         link : ""
+       },
+    })
   }
 </script>
