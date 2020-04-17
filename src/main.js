@@ -8,7 +8,6 @@ import '@mdi/font/css/materialdesignicons.css'
 
 import VueRouter from 'vue-router';
 
-
 Vue.use(VueRouter);
 
 const routes = [
