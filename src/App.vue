@@ -24,7 +24,7 @@
                   <v-spacer />
                   <v-card-subtitle v-text="data.content" class="pt-1"></v-card-subtitle>
                   <v-spacer />
-                  <v-btn class="primary">Enroll Now</v-btn>
+                  <v-btn class="primary" :to="data.link">Enroll Now</v-btn>
                 </div>
               </div>
             </v-card>
@@ -42,13 +42,13 @@ export default {
       {
         src: require("./assets/shs.svg"),
         title: "Senior High School",
-        link: "",
+        link: "/shs",
         content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec convallis volutpat diam, sit amet blandit erat tempus ut. Aliquam hendrerit sodales finibus. Suspendisse potenti. Suspendisse imperdiet dui a varius porta. Quisque lobortis maximus semper. Sed pretium sapien nec est lobortis, ut interdum lorem blandit. Aliquam vel dapibus mauris."
       },
       {
         src: require("./assets/college.svg"),
         title: "College",
-        link: "",
+        link: "/",
         content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec convallis volutpat diam, sit amet blandit erat tempus ut. Aliquam hendrerit sodales finibus. Suspendisse potenti. Suspendisse imperdiet dui a varius porta. Quisque lobortis maximus semper. Sed pretium sapien nec est lobortis, ut interdum lorem blandit. Aliquam vel dapibus mauris."
       
       },
