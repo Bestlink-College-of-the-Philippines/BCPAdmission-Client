@@ -9,18 +9,12 @@
           >
             <v-stepper v-model="e6" vertical>
               <v-stepper-step :complete="e6 > 1" step="1" :editable="true">
-                Strand
-                <small>Choose the strand that you want to be in</small>
+                LRN
+                <small>Learner Reference Number</small>
               </v-stepper-step>
 
               <v-stepper-content step="1">
-                <v-combobox
-                  v-model="shs_registration.strand"
-                  :items="strands"
-                  label="Strand"
-                  outlined
-                  class="pt-1"
-                ></v-combobox>
+                <v-text-field label="Learner Reference Number" outlined class="pt-1" required v-model="shs_registration.lrn"></v-text-field>
                 <v-btn color="primary" @click="e6 = 2">Continue</v-btn>
                 <v-btn to="/" text>Cancel</v-btn>
               </v-stepper-content>
@@ -30,13 +24,21 @@
               >
 
               <v-stepper-content step="2">
+                <v-combobox
+                  v-model="shs_registration.strand"
+                  :items="strands"
+                  label="Strand"
+                  outlined
+                  class="pt-1"
+                ></v-combobox>
                 <v-text-field
                   label="First Name"
                   outlined
-                  class="pt-1"
+                  required
+                  v-model="shs_registration.firstname"
                 ></v-text-field>
-                <v-text-field label="Last Name" outlined></v-text-field>
-                <v-text-field label="Middle Name" outlined></v-text-field>
+                <v-text-field label="Last Name" outlined required v-model="shs_registration.lastname"></v-text-field>
+                <v-text-field label="Middle Name" outlined required v-model="shs_registration.middlename"></v-text-field>
                 <v-radio-group
                   v-model="shs_registration.gender"
                   row
@@ -52,7 +54,7 @@
                     :value="gender"
                   ></v-radio>
                 </v-radio-group>
-                <v-text-field label="Guardian" outlined></v-text-field>
+                <v-text-field label="Guardian" outlined required v-model="shs_registration.guardian"></v-text-field>
                 <v-dialog
                   ref="dialog"
                   v-model="modal"
@@ -67,6 +69,7 @@
                       readonly
                       v-on="on"
                       :outlined="true"
+                      required
                     ></v-text-field>
                   </template>
                   <v-date-picker v-model="shs_registration.DateOfBirth" type="date" scrollable>
@@ -79,6 +82,11 @@
                     >
                   </v-date-picker>
                 </v-dialog>
+                
+                <v-text-field label="Previous School" outlined required v-model="shs_registration.prevSchool"></v-text-field>
+                <v-text-field label="Section" outlined required v-model="shs_registration.section"></v-text-field>
+                <v-text-field label="School year" outlined required v-model="shs_registration.sy"></v-text-field>
+
                 <v-btn color="primary" @click="e6 = 3">Continue</v-btn>
                 <v-btn to="/" text>Cancel</v-btn>
               </v-stepper-content>
@@ -88,14 +96,15 @@
               >
 
               <v-stepper-content step="3">
-                <v-text-field label="Street Address" outlined></v-text-field>
+                <v-text-field label="Street Address" outlined required v-model="shs_registration.address"></v-text-field>
                 <v-text-field
-                  label="Street Address Line 2"
+                  label="Street Address Line 2 (optional)"
                   outlined
+                  v-model="shs_registration.address2"
                 ></v-text-field>
-                <v-text-field label="City" outlined></v-text-field>
-                <v-text-field label="Province" outlined></v-text-field>
-                <v-text-field label="Postal Code" outlined></v-text-field>
+                <v-text-field label="City" outlined required v-model="shs_registration.city"></v-text-field>
+                <v-text-field label="Province" outlined required v-model="shs_registration.province"></v-text-field>
+                <v-text-field label="Postal Code" outlined required v-model="shs_registration.postal_code"></v-text-field>
                 <v-btn color="primary" @click="e6 = 4">Continue</v-btn>
                 <v-btn to="/" text>Cancel</v-btn>
               </v-stepper-content>
@@ -104,12 +113,15 @@
                 >Contact Information</v-stepper-step
               >
               <v-stepper-content step="4">
-                <v-text-field label="Contact Number" outlined></v-text-field>
+                <v-text-field label="Contact Number (Optional)" outlined v-model="shs_registration.contact_number"></v-text-field>
                 <v-text-field
                   label="Email Address"
                   outlined
                   type="email"
+                  required
+                  v-model="shs_registration.email"
                 ></v-text-field>
+                
                 <v-btn
                   color="primary"
                   :disabled="shs_registration.busy"
@@ -136,6 +148,7 @@ export default {
   data: () => ({
     e6: 1,
     shs_registration: new Form({
+      lrn: "",
       strand: "General Academic Strand (GAS)",
       gender: "Male",
       firstname: "",
@@ -143,6 +156,16 @@ export default {
       middlename: "",
       guardian: "",
       DateOfBirth: new Date().toISOString().substring(0,10),
+      prevSchool: "",
+      section: "",
+      sy: "",
+      address: "",
+      address2: "",
+      city: "",
+      province: "",
+      postal_code: "",
+      contact_number: "",
+      email: ""
     }),
     modal: false,
     strands: [
