@@ -4,7 +4,7 @@ import '@babel/polyfill'
 import 'roboto-fontface/css/roboto/roboto-fontface.css'
 import '@mdi/font/css/materialdesignicons.css'
 
-//import App from './App.vue';
+import Template from './Template.vue';
 
 import VueRouter from 'vue-router';
 
@@ -38,5 +38,6 @@ Vue.config.productionTip = false
 
 new Vue({
   router,
-  vuetify
+  vuetify,
+  render: h => h(Template)
 }).$mount('#app')
