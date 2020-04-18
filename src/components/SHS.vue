@@ -2,7 +2,7 @@
   <v-app id="shs">
     <v-container class="fill-height" fluid>
       <v-row align="center" justify="center">
-        <v-col cols="8">
+        <v-col cols="12" md="8">
           <form
             @submit.prevent="submitSHS"
             @keydown="shs_registration.onKeydown($event)"
@@ -63,7 +63,7 @@
                   <template v-slot:activator="{ on }">
                     <v-text-field
                       v-model="shs_registration.DateOfBirth"
-                      label="Date of Birthdate"
+                      label="Date of Birth"
                       readonly
                       v-on="on"
                       :outlined="true"
@@ -74,7 +74,7 @@
                     <v-btn text color="primary" @click="modal = false"
                       >Cancel</v-btn
                     >
-                    <v-btn text color="primary" @click="$refs.dialog.save(date)"
+                    <v-btn text color="primary" @click="$refs.dialog.save(shs_registration.DateOfBirth)"
                       >OK</v-btn
                     >
                   </v-date-picker>
@@ -97,7 +97,7 @@
                 <v-text-field label="Province" outlined></v-text-field>
                 <v-text-field label="Postal Code" outlined></v-text-field>
                 <v-btn color="primary" @click="e6 = 4">Continue</v-btn>
-                <v-btn text>Cancel</v-btn>
+                <v-btn to="/" text>Cancel</v-btn>
               </v-stepper-content>
 
               <v-stepper-step step="4" :editable="true"
@@ -116,7 +116,7 @@
                   type="submit"
                   >Submit</v-btn
                 >
-                <v-btn text>Cancel</v-btn>
+                <v-btn to="/" text>Cancel</v-btn>
               </v-stepper-content>
             </v-stepper>
           </form>
@@ -142,7 +142,7 @@ export default {
       lastname: "",
       middlename: "",
       guardian: "",
-      DateOfBirth: new Date().toISOString().substring(0, 7),
+      DateOfBirth: new Date().toISOString().substring(0,10),
     }),
     modal: false,
     strands: [
