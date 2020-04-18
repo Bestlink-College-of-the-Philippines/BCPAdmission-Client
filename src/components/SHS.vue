@@ -2,9 +2,10 @@
   <v-app id="shs">
     <v-container class="fill-height" fluid>
       <v-row align="center" justify="center">
+        <form>
         <v-col cols="8">
           <v-stepper v-model="e6" vertical>
-            <v-stepper-step :complete="e6 > 1" step="1">
+            <v-stepper-step :complete="e6 > 1" step="1" :editable="true">
               Strand
               <small>Choose the strand that you want to be in</small>
             </v-stepper-step>
@@ -18,49 +19,70 @@
                 class="pt-1"
               ></v-combobox>
               <v-btn color="primary" @click="e6 = 2">Continue</v-btn>
-              <v-btn text>Cancel</v-btn>
+              <v-btn to="/" text>Cancel</v-btn>
             </v-stepper-content>
 
-            <v-stepper-step :complete="e6 > 2" step="2"
-              >Configure analytics for this app</v-stepper-step
+            <v-stepper-step :complete="e6 > 2" step="2" :editable="true"
+              >Personal Information</v-stepper-step
             >
 
             <v-stepper-content step="2">
-              <v-card
-                color="grey lighten-1"
-                class="mb-12"
-                height="200px"
-              ></v-card>
+              <v-text-field
+                label="First Name"
+                outlined
+                class="pt-1"
+              ></v-text-field>
+              <v-text-field label="Last Name" outlined></v-text-field>
+              <v-text-field label="Middle Name" outlined></v-text-field>
+              <v-radio-group v-model="shs_registration.gender" row class="pb-1">
+                <template v-slot:label>
+                  <div><strong>Gender</strong>:</div>
+                </template>
+                <v-radio
+                  v-for="gender in Genders"
+                  :key="gender"
+                  :label="gender"
+                  :value="gender"
+                ></v-radio>
+              </v-radio-group>
+              <v-text-field label="Guardian" outlined></v-text-field>
               <v-btn color="primary" @click="e6 = 3">Continue</v-btn>
-              <v-btn text>Cancel</v-btn>
+              <v-btn to="/" text>Cancel</v-btn>
             </v-stepper-content>
 
-            <v-stepper-step :complete="e6 > 3" step="3"
-              >Select an ad format and name ad unit</v-stepper-step
+            <v-stepper-step :complete="e6 > 3" step="3" :editable="true"
+              >Address</v-stepper-step
             >
 
             <v-stepper-content step="3">
-              <v-card
-                color="grey lighten-1"
-                class="mb-12"
-                height="200px"
-              ></v-card>
+              <v-text-field label="Street Address" outlined></v-text-field>
+              <v-text-field
+                label="Street Address Line 2"
+                outlined
+              ></v-text-field>
+              <v-text-field label="City" outlined></v-text-field>
+              <v-text-field label="Province" outlined></v-text-field>
+              <v-text-field label="Postal Code" outlined></v-text-field>
               <v-btn color="primary" @click="e6 = 4">Continue</v-btn>
               <v-btn text>Cancel</v-btn>
             </v-stepper-content>
 
-            <v-stepper-step step="4">View setup instructions</v-stepper-step>
+            <v-stepper-step step="4" :editable="true"
+              >Contact Information</v-stepper-step
+            >
             <v-stepper-content step="4">
-              <v-card
-                color="grey lighten-1"
-                class="mb-12"
-                height="200px"
-              ></v-card>
-              <v-btn color="primary" @click="e6 = 1">Continue</v-btn>
+              <v-text-field label="Contact Number" outlined></v-text-field>
+              <v-text-field
+                label="Email Address"
+                outlined
+                type="email"
+              ></v-text-field>
+              <v-btn color="primary" @click="e6 = 1">Submit</v-btn>
               <v-btn text>Cancel</v-btn>
             </v-stepper-content>
           </v-stepper>
         </v-col>
+        </form>
       </v-row>
     </v-container>
   </v-app>
@@ -76,7 +98,8 @@ export default {
   data: () => ({
     e6: 1,
     shs_registration: new Form({
-      strand: "Strand",
+      strand: "General Academic Strand (GAS)",
+      gender: "Male",
     }),
     strands: [
       "General Academic Strand (GAS)",
@@ -88,10 +111,14 @@ export default {
       "Home Economics (HE)",
       "Industrial Arts (IA)",
     ],
+    Genders: ["Male", "Female"],
   }),
 
-  computed: {
-      
-  }
+  methods: {
+    submitSHS() {
+      //
+    }
+  },
+  computed: {},
 };
 </script>
